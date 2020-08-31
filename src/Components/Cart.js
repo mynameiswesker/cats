@@ -39,8 +39,10 @@ export function Cart({text,getCart}) {
     },[changeClick])
 
     //передали выбранную карту родителю 
-    const handler_add_cart = () => {
-        getCart(text_cart)
+    const handler_add_cart = (e) => {
+        if(e.target.className === 'cart'){
+            getCart(text_cart)
+        }
     }
 
   return (
@@ -50,9 +52,11 @@ export function Cart({text,getCart}) {
             onMouseEnter={handler_hover} 
             onMouseLeave={handler_leave} 
             style={isActive ? {borderColor:color_active} : {borderColor:color_default} && text_cart.disable ? {pointerEvents:'none'} : {pointerEvents:'all'}}
-            onClick={()=>{
-                changeActive(!isActive)
-                handler_add_cart()
+            onClick={(e)=>{
+                if(e.target.className === 'cart'){
+                    changeActive(!isActive)
+                }
+                handler_add_cart(e)
                 }
             }
         >
